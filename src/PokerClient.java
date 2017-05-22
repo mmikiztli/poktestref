@@ -1,54 +1,41 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.*;
+import java.util.stream.IntStream;
 
 public class PokerClient {
 
-    public Card card1;
-    public Card card2;
-    public Card card3;
-    public Card card4;
-    public Card card5;
+    private List<Card> myCards;
+    private List<Card> opponentCards;
 
-    public PokerClient(String p1, String p2, String p3, String p4, String p5) {
-        this.card1 = new Card(p1.toUpperCase());
-        this.card2 = new Card(p2.toUpperCase());
-        this.card3 = new Card(p3.toUpperCase());
-        this.card4 = new Card(p4.toUpperCase());
-        this.card5 = new Card(p5.toUpperCase());
+
+    public PokerClient(String card1, String card2, String card3, String card4, String card5) {
+        myCards = new ArrayList<Card>();
+        myCards.add(new Card(card1));
+        myCards.add(new Card(card2));
+        myCards.add(new Card(card3));
+        myCards.add(new Card(card4));
+        myCards.add(new Card(card5));
+
+
+
     }
 
-    public boolean highestCardIsMine(String p1, String p2, String p3, String p4, String p5) {
-        Card hc = new Card("s2");
-        List<Card> o = new ArrayList<Card>();
-        List<Card> m = new ArrayList<Card>();
-        o.add(new Card(p1.toUpperCase()));
-        o.add(new Card(p2.toUpperCase()));
-        o.add(new Card(p3.toUpperCase()));
-        o.add(new Card(p4.toUpperCase()));
-        o.add(new Card(p5.toUpperCase()));
-        m.add(card1);
-        m.add(card2);
-        m.add(card3);
-        m.add(card4);
-        m.add(card5);
+    public boolean highestCardIsMine(String card1, String card2, String card3, String card4, String card5) {
+        opponentCards = new ArrayList<Card>();
+        opponentCards.add(new Card(card1));
+        opponentCards.add(new Card(card2));
+        opponentCards.add(new Card(card3));
+        opponentCards.add(new Card(card4));
+        opponentCards.add(new Card(card5));
 
-        for (int i = 0; i < o.size(); i++) {
-            Card mc = m.get(i);
-            for (int j = 0; j < o.size(); j++) {
-                Card oc = o.get(j);
-                if (oc.getValue() > mc.getValue()) {
-                    if (oc.getValue() > hc.getValue()) {
-                        hc = oc;
-                    }
-                } else {
-                    if (mc.getValue() > hc.getValue()) {
-                        hc = mc;
-                    }
-                }
-            }
+        Card myMax = myCards.stream().max(Comparator.comparing(Card::getValue)).get();
+        Card opponentMax = opponentCards.stream().max(Comparator.comparing(Card::getValue)).get();
+        if(myMax.getValue() < opponentMax.getValue()) {
+            return false;
+        }else{
+            return true;
         }
 
-        return m.contains(hc);
     }
 
 }

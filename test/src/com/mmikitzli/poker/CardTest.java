@@ -1,3 +1,5 @@
+package com.mmikitzli.poker;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.*;

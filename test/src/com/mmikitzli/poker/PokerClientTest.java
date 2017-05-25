@@ -1,4 +1,6 @@
-import org.junit.jupiter.api.BeforeEach;
+package src.com.mmikitzli.poker;
+
+import com.mmikitzli.poker.PokerClient;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
